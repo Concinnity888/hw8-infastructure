@@ -2,27 +2,26 @@
 
 CURRENT_TAG=$(git tag | sort -r | head -1)
 PREV_TAG=$(git tag | sort -r | head -1 | tail -1)
-echo "\nCURRENT_TAG: ${CURRENT_TAG}\n"
-echo "\nPREV_TAG: ${PREV_TAG}\n"
 AUTHOR=$(git show "$CURRENT_TAG" --pretty=format:"%an" --no-patch)
 DATE=$(git show "$CURRENT_TAG" --pretty=format:"%ad" --no-patch)
 echo "\nAUTHOR: ${AUTHOR}\n"
 echo "\nDATE: ${DATE}\n"
 
-# CHANGELOG=$(git log ${PREV_TAG}.. --pretty=format:"%s | %an, %ad\n" --date=short | tr -s "\n" " ")
-# DESCRIPTION="${AUTHOR} \n ${DATE} \n Номер версии: ${CURRENT_TAG} \n changelog: ${CHANGELOG}"
-# UNIQUE_KEY="https://github.com/Concinnity888/hw8-infastructure/releases/tag/${CURRENT_TAG}"
-# URL="https://api.tracker.yandex.net/v2/issues/"
+CHANGELOG=$(git log ${PREV_TAG}.. --pretty=format:"%s | %an, %ad\n" --date=short | tr -s "\n" " ")
+DESCRIPTION="${AUTHOR} \n ${DATE} \n Номер версии: ${CURRENT_TAG} \n changelog: ${CHANGELOG}"
+UNIQUE_KEY="https://github.com/Concinnity888/hw8-infastructure/releases/tag/${CURRENT_TAG}"
+URL="https://api.tracker.yandex.net/v2/issues/"
 
-# REQUEST='{
-#   "summary": "'"${CURRENT_TAG}"'",
-#   "description": "'"${DESCRIPTION}"'",
-#   "queue": "TMP",
-#   "unique": "'"${UNIQUE_KEY}"'"
-# }'
-# echo "\nCURRENT_TAG: ${CURRENT_TAG}\n"
-# echo "\nDESCRIPTION: ${DESCRIPTION}\n"
-# echo "\nUNIQUE_KEY: ${UNIQUE_KEY}\n"
+REQUEST='{
+  "summary": "'"Релиз ${CURRENT_TAG}"'",
+  "description": "'"${DESCRIPTION}"'",
+  "queue": "TMP",
+  "unique": "'"${UNIQUE_KEY}"'"
+}'
+
+echo "\nDESCRIPTION: ${DESCRIPTION}\n"
+echo "\nUNIQUE_KEY: ${UNIQUE_KEY}\n"
+echo "\nREQUEST: ${REQUEST}\n"
 
 # RESPONSE=$(
 #   curl -X POST ${URL} \
