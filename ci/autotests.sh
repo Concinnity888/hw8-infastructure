@@ -11,7 +11,7 @@ RELEASE_URL=$(
   --header "Authorization: OAuth ${OAUTH}" \
   --header "X-Org-ID: ${ORG}" \
   --header 'Content-Type: application/json' \
-  --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[0].key"
+  --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].self"
 )
 echo "RELEASE: ${RELEASE_URL}"
 
