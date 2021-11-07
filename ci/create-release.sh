@@ -59,6 +59,7 @@ elif [ ${RESPONSE} = 409 ]; then
       "description": "'"${DESCRIPTION}"'",
     }'
   )
+  echo "\nStatus code: ${UPDATE}\n"
   if [ ${UPDATE} = 200 ]; then
     echo "Задача успешно обновлена"
     exit 0
