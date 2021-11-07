@@ -4,7 +4,7 @@ RESULT=$(npm test 2>&1 | tr -s "\n" " ")
 echo "RESULT: ${RESULT}"
 
 CURRENT_TAG=$(git tag | sort -r | head -1)
-UNIQUE_KEY="https://github.com/Concinnity888/hw8-infastructure/releases/tag/${CURRENT_TAG}"
+UNIQUE_KEY="https://github.com/Concinnity888/hw8-infrastructure/releases/tag/${CURRENT_TAG}"
 
 RELEASE_URL=$(
   curl -s -X POST "https://api.tracker.yandex.net/v2/issues/_search" \

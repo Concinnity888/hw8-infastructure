@@ -1,5 +1,5 @@
 {
-    "name": "hw8-infastructure",
+    "name": "hw8-infrastructure",
     "version": "1.0.0",
     "scripts": {
         "start": "nodemon ./src/server/index.ts",

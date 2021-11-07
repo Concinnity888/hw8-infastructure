@@ -7,7 +7,7 @@ DATE=$(git show "$CURRENT_TAG" --pretty=format:"%ad" --no-patch)
 
 CHANGELOG=$(git log ${PREV_TAG}.. --pretty=format:"%s | %an, %ad\n" --date=short | tr -s "\n" " ")
 DESCRIPTION="${AUTHOR} \n ${DATE} \n Номер версии: ${CURRENT_TAG} \n changelog: ${CHANGELOG}"
-UNIQUE_KEY="https://github.com/Concinnity888/hw8-infastructure/releases/tag/${CURRENT_TAG}"
+UNIQUE_KEY="https://github.com/Concinnity888/hw8-infrastructure/releases/tag/${CURRENT_TAG}"
 URL="https://api.tracker.yandex.net/v2/issues/"
 
 REQUEST='{
@@ -45,24 +45,8 @@ if [ ${RESPONSE} = 201 ]; then
   echo "Задача создана"
   exit 0
 elif [ ${RESPONSE} = 409 ]; then
-  UPDATE=$(curl -X POST "https://api.tracker.yandex.net/v2/issues/${TASK_NAME}" \
-    --header "Content-Type: application/json" \
-    --header "Authorization: OAuth ${OAUTH} " \
-    --header "X-Org-Id: ${ORG}" \
-    --data '{
-      "summary": "'"Релиз ${CURRENT_TAG}"'",
-      "description": "'"${DESCRIPTION}"'",
-    }'
-  )
-  echo "\nUPDATE: ${UPDATE}\n"
+  echo 'Задача с таким релизом уже создана'
   exit 0
-  # if [ ${UPDATE} = 200 ]; then
-  #   echo "Задача успешно обновлена"
-  #   exit 0
-  # else
-  #   echo "Ошибка обновления"
-  #   exit 1
-  # fi
 else
   echo "Ошибка"
   exit 1
