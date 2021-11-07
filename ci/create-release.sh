@@ -44,12 +44,9 @@ echo "TASK_NAME: ${TASK_NAME}"
 if [ ${RESPONSE} = 201 ]; then
   echo "Задача создана"
   exit 0
-elif [ ${RESPONSE} = 403 ]; then
-  echo "Ошибка аторизации"
-  exit 1
 elif [ ${RESPONSE} = 409 ]; then
   echo 'Задача с таким релизом уже создана'
-  UPDATE=$(curl -so dev/null -w '%{http_code}' -X POST \
+  UPDATE=$(curl -X POST \
     "https://api.tracker.yandex.net/v2/issues/${TASK_NAME}" \
     --header "Content-Type: application/json" \
     --header "Authorization: OAuth ${OAUTH} " \
