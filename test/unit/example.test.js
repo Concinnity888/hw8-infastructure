@@ -6,4 +6,8 @@ describe('Simple Test Case', () => {
   it('Should return empty string', () => {
     expect('').toBe('');
   });
+
+  it('Should return empty string', () => {
+    expect('').toBe('');
+  });
 });
