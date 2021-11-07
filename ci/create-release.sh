@@ -31,7 +31,7 @@ echo "\nStatus code: ${RESPONSE}\n"
 TASK_NAME=$(
   curl -X POST "https://api.tracker.yandex.net/v2/issues/_search" \
   --header "Authorization: OAuth $OAUTH " \
-  --header "X-Org-Id: $XORGID" \
+  --header "X-Org-Id: $ORG" \
   --header "Content-Type: application/json" \
   --data '{
     "filter": {
