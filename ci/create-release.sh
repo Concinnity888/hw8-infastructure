@@ -46,8 +46,7 @@ if [ ${RESPONSE} = 201 ]; then
   exit 0
 elif [ ${RESPONSE} = 409 ]; then
   echo 'Задача с таким релизом уже создана'
-    UPDATE=$(curl -X PATCH "/v2/issues/${TASK_NAME}" \
-    --header "Host: https://api.tracker.yandex.net" \
+    UPDATE=$(curl -X PATCH "https://api.tracker.yandex.net/v2/issues/${TASK_NAME}" \
     --header "Content-Type: application/json" \
     --header "Authorization: OAuth ${OAUTH} " \
     --header "X-Org-Id: ${ORG}" \
@@ -65,7 +64,7 @@ elif [ ${RESPONSE} = 409 ]; then
   #     "description": "'"${DESCRIPTION}"'",
   #   }'
   # )
-  echo "\nStatus code: ${UPDATE}\n"
+  echo "\nUPDATE: ${UPDATE}\n"
   # if [ ${UPDATE} = 200 ]; then
   #   echo "Задача успешно обновлена"
   #   exit 0
