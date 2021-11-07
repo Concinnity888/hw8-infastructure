@@ -16,15 +16,31 @@ REQUEST='{
   "queue": "TMP",
   "unique": "'"${UNIQUE_KEY}"'"
 }'
+echo "\nCURRENT_TAG: ${CURRENT_TAG}\n"
+echo "\nDESCRIPTION: ${DESCRIPTION}\n"
+echo "\nUNIQUE_KEY: ${UNIQUE_KEY}\n"
 
 RESPONSE=$(
-  curl -so dev/null -w '%{http_code}' -X POST ${URL} \
+  curl -X POST ${URL} \
   --header "Authorization: OAuth ${OAUTH}" \
   --header "X-Org-ID: ${ORG}" \
   --header "Content-Type: application/json" \
   --data "${REQUEST}"
 )
 echo "\nStatus code: ${RESPONSE}\n"
+
+TASK_NAME=$(
+  curl -X POST "https://api.tracker.yandex.net/v2/issues/_search" \
+  --header "Authorization: OAuth $OAUTH " \
+  --header "X-Org-Id: $XORGID" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "filter": {
+      "unique": "'"${UNIQUE_KEY}"'"
+    }
+  }' | jq -r '.[0].key'
+)
+echo "TASK_NAME: ${TASK_NAME}"
 
 if [ ${RESPONSE} = 201 ]; then
   echo "Задача создана"
@@ -35,7 +51,7 @@ elif [ ${RESPONSE} = 403 ]; then
 elif [ ${RESPONSE} = 409 ]; then
   echo 'Задача с таким релизом уже создана'
   UPDATE=$(curl -X POST \
-    "https://api.tracker.yandex.net/v2/issues/${RESPONSE}" \
+    "https://api.tracker.yandex.net/v2/issues/${TASK_NAME}" \
     --header "Content-Type: application/json" \
     --header "Authorization: OAuth ${OAUTH} " \
     --header "X-Org-Id: ${ORG}" \
