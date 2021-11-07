@@ -15,6 +15,7 @@ REQUEST='{
   "queue": "TMP",
   "unique": "'"${UNIQUE_KEY}"'"
 }'
+echo "\nREQUEST: ${REQUEST}\n"
 
 RESPONSE=$(
   curl -so dev/null -w '%{http_code}' -X POST "https://api.tracker.yandex.net/v2/issues/" \
