@@ -1,0 +1,36 @@
+name: 'ci'
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  release-registry:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - uses: actions/setup-node@v1
+      name: 'setup node'
+      with:
+        node-version: '16.x'
+
+    - name: 'install'
+      run: |
+        npm i
+        sudo apt-get install jq
+
+    - name: 'release'
+      run: sh ./ci/create-release.sh
+        env:
+          OAUTH: ${{ secrets.TRACKER_OAUTH }}
+          ORG: ${{ secrets.TRACKER_ORG }}
+
+    - name: 'tests'
+      run: sh ./ci/autotests.sh
+        env:
+          OAUTH: ${{ secrets.TRACKER_OAUTH }}
+          ORG: ${{ secrets.TRACKER_ORG }}
