@@ -45,15 +45,15 @@ if [ ${RESPONSE} = 201 ]; then
   echo "Задача создана"
   exit 0
 elif [ ${RESPONSE} = 409 ]; then
-  # UPDATE=$(curl -X POST "https://api.tracker.yandex.net/v2/issues/${TASK_NAME}" \
-  #   --header "Content-Type: application/json" \
-  #   --header "Authorization: OAuth ${OAUTH} " \
-  #   --header "X-Org-Id: ${ORG}" \
-  #   --data '{
-  #     "summary": "'"Релиз ${CURRENT_TAG}"'",
-  #     "description": "'"${DESCRIPTION}"'",
-  #   }'
-  # )
+  UPDATE=$(curl -X POST "https://api.tracker.yandex.net/v2/issues/${TASK_NAME}" \
+    --header "Content-Type: application/json" \
+    --header "Authorization: OAuth ${OAUTH} " \
+    --header "X-Org-Id: ${ORG}" \
+    --data '{
+      "summary": "'"Релиз ${CURRENT_TAG}"'",
+      "description": "'"${DESCRIPTION}"'",
+    }'
+  )
   echo "\nUPDATE: ${UPDATE}\n"
   exit 0
   # if [ ${UPDATE} = 200 ]; then
