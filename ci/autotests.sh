@@ -16,7 +16,7 @@ RELEASE_URL=$(
 echo "RELEASE: ${RELEASE_URL}"
 
 RESPONSE=$(
-  curl -s dev/null -w '%{http_code}' -X POST "https://api.tracker.yandex.net/v2/issues/${RELEASE_URL}/comments" \
+  curl -s dev/null -w '%{http_code}' -X POST "${RELEASE_URL}/comments" \
   --header "Authorization: OAuth ${OAUTH}" \
   --header "X-Org-ID: ${ORG}" \
   --header "Content-Type: application/json" \
