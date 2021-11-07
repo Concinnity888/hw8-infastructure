@@ -25,12 +25,12 @@ jobs:
 
     - name: 'release'
       run: sh ./ci/create-release.sh
-        env:
-          OAUTH: ${{ secrets.TRACKER_OAUTH }}
-          ORG: ${{ secrets.TRACKER_ORG }}
+      env:
+        OAUTH: ${{ secrets.TRACKER_OAUTH }}
+        ORG: ${{ secrets.TRACKER_ORG }}
 
     - name: 'tests'
       run: sh ./ci/autotests.sh
-        env:
-          OAUTH: ${{ secrets.TRACKER_OAUTH }}
-          ORG: ${{ secrets.TRACKER_ORG }}
+      env:
+        OAUTH: ${{ secrets.TRACKER_OAUTH }}
+        ORG: ${{ secrets.TRACKER_ORG }}
