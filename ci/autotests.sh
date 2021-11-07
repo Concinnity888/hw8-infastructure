@@ -15,7 +15,7 @@ RELEASE_URL=$(
 echo "RELEASE: ${RELEASE_URL}"
 
 RESPONSE=$(
-  curl -so dev/null -w '%{http_code}' -X POST ${RELEASE_URL}/comments \ 
+  curl -so dev/null -w '%{http_code}' -X POST ${RELEASE_URL}/comments \
   --header "Authorization: OAuth ${OAUTH}" \
   --header "X-Org-ID: ${ORG}" \
   --header "Content-Type: application/json" \
