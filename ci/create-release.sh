@@ -2,6 +2,7 @@
 
 CURRENT_TAG=$(git tag | sort -r | head -1)
 PREV_TAG=$(git tag | sort -r | head -1 | tail -1)
+echo "\nPREV_TAG: ${PREV_TAG}\n"
 AUTHOR=$(git show $"CURRENT_TAG" | grep Author:)
 DATE=$(git show $"PREV_TAG" | grep Date:)
 echo "\nDATE: ${DATE}\n"
