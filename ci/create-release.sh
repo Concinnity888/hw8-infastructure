@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-CURRENT_TAG=$(git tag --sort version:refname | tail -1 | head -1)
-PREV_TAG=$(git tag --sort version:refname | tail -2 | head -1)
+CURRENT_TAG=$(git tag | sort -r | head -1)
+PREV_TAG=$(git tag | sort -r | head -1 | tail -1)
 echo "\nCURRENT_TAG: ${CURRENT_TAG}\n"
 echo "\nPREV_TAG: ${PREV_TAG}\n"
 AUTHOR=$(git show ${CURRENT_TAG} | grep Author:)
