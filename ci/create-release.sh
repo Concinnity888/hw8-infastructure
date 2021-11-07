@@ -20,7 +20,7 @@ REQUEST='{
 echo "\nREQUEST: ${REQUEST}\n"
 
 RESPONSE=$(
-  curl -X POST ${URL} \
+  curl -so dev/null -w '%{http_code}' -X POST ${URL} \
   --header "Authorization: OAuth ${OAUTH}" \
   --header "X-Org-ID: ${ORG}" \
   --header "Content-Type: application/json" \
@@ -55,7 +55,7 @@ elif [ ${RESPONSE} = 409 ]; then
     --header "Authorization: OAuth ${OAUTH} " \
     --header "X-Org-Id: ${ORG}" \
     --data '{
-      "summary": "'"${CURRENT_TAG}"'",
+      "summary": "'"Релиз ${CURRENT_TAG}"'",
       "description": "'"${DESCRIPTION}"'",
     }'
   )
