@@ -47,17 +47,17 @@ if [ ${RESPONSE} = 201 ]; then
 elif [ ${RESPONSE} = 409 ]; then
   echo 'Задача с таким релизом уже создана'
   exit 0
-  # UPDATE=$(curl -so dev/null -w '%{http_code}' -X PATCH \
-  #   "https://api.tracker.yandex.net/v2/issues/${TASK_NAME}" \
-  #   --header "Content-Type: application/json" \
-  #   --header "Authorization: OAuth ${OAUTH} " \
-  #   --header "X-Org-Id: ${ORG}" \
-  #   --data '{
-  #     "summary": "'"Релиз ${CURRENT_TAG}"'",
-  #     "description": "'"${DESCRIPTION}"'",
-  #   }'
-  # )
-  # echo "\nStatus code: ${UPDATE}\n"
+  UPDATE=$(curl -so dev/null -w '%{http_code}' -X PATCH \
+    "https://api.tracker.yandex.net/v2/issues/${TASK_NAME}" \
+    --header "Content-Type: application/json" \
+    --header "Authorization: OAuth ${OAUTH} " \
+    --header "X-Org-Id: ${ORG}" \
+    --data '{
+      "summary": "'"Релиз ${CURRENT_TAG}"'",
+      "description": "'"${DESCRIPTION}"'",
+    }'
+  )
+  echo "\nStatus code: ${UPDATE}\n"
   # if [ ${UPDATE} = 200 ]; then
   #   echo "Задача успешно обновлена"
   #   exit 0
