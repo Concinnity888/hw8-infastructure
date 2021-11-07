@@ -21,7 +21,7 @@ echo "\nOAUTH: ${OAUTH}\n"
 echo "\nORG: ${ORG}\n"
 
 RESPONSE=$(
-  curl -so dev/null -w '%{http_code}' -X POST ${URL} \
+  curl -X POST ${URL} \
   --header "Authorization: OAuth ${OAUTH}" \
   --header "X-Org-ID: ${ORG}" \
   --header "Content-Type: application/json" \
