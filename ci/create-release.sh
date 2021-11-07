@@ -4,8 +4,8 @@ CURRENT_TAG=$(git tag | sort -r | head -1)
 PREV_TAG=$(git tag | sort -r | head -1 | tail -1)
 echo "\nCURRENT_TAG: ${CURRENT_TAG}\n"
 echo "\nPREV_TAG: ${PREV_TAG}\n"
-AUTHOR=$(git show ${CURRENT_TAG} | grep Author:)
-DATE=$(git show ${CURRENT_TAG} | grep Date:)
+AUTHOR=$(git show "$CURRENT_TAG" --pretty=format:"%an" --no-patch)
+DATE=$(git show "$CURRENT_TAG" --pretty=format:"%an" --no-patch)
 echo "\nAUTHOR: ${AUTHOR}\n"
 echo "\nDATE: ${DATE}\n"
 
