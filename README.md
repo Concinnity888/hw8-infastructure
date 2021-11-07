@@ -4,7 +4,10 @@
 
 * Добавьте изменения в проект
 * Зафиксируйте изменения
-```git add .
-git commit -m "<commit_message>"```
+```
+git add .
+git commit -m "<commit_message>"
+```
+
 * Создайте тег для коммитов `git tag <tag> <commit_hash>`
 * Залейте изменения в main `main`
