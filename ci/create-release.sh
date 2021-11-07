@@ -4,6 +4,7 @@ CURRENT_TAG=$(git tag | sort -r | head -1)
 PREV_TAG=$(git tag | sort -r | head -1 | tail -1)
 AUTHOR=$(git show ${CURRENT_TAG} | grep Author:)
 DATE=$(git show ${PREV_TAG} | grep Date:)
+echo "\nDATE: ${DATE}\n"
 
 CHANGELOG=$(git log ${PREV_TAG}.. --pretty=format:"%s | %an, %ad\n" --date=short | tr -s "\n" " ")
 DESCRIPTION="${AUTHOR} \n ${DATE} \n Номер версии: ${CURRENT_TAG} \n changelog: ${CHANGELOG}"
