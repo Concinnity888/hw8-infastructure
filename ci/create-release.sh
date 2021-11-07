@@ -4,8 +4,6 @@ CURRENT_TAG=$(git tag | sort -r | head -1)
 PREV_TAG=$(git tag | sort -r | head -1 | tail -1)
 AUTHOR=$(git show "$CURRENT_TAG" --pretty=format:"%an" --no-patch)
 DATE=$(git show "$CURRENT_TAG" --pretty=format:"%ad" --no-patch)
-echo "\nAUTHOR: ${AUTHOR}\n"
-echo "\nDATE: ${DATE}\n"
 
 CHANGELOG=$(git log ${PREV_TAG}.. --pretty=format:"%s | %an, %ad\n" --date=short | tr -s "\n" " ")
 DESCRIPTION="${AUTHOR} \n ${DATE} \n Номер версии: ${CURRENT_TAG} \n changelog: ${CHANGELOG}"
@@ -19,18 +17,16 @@ REQUEST='{
   "unique": "'"${UNIQUE_KEY}"'"
 }'
 
-echo "\nDESCRIPTION: ${DESCRIPTION}\n"
-echo "\nUNIQUE_KEY: ${UNIQUE_KEY}\n"
 echo "\nREQUEST: ${REQUEST}\n"
 
-# RESPONSE=$(
-#   curl -X POST ${URL} \
-#   --header "Authorization: OAuth ${OAUTH}" \
-#   --header "X-Org-ID: ${ORG}" \
-#   --header "Content-Type: application/json" \
-#   --data "${REQUEST}"
-# )
-# echo "\nStatus code: ${RESPONSE}\n"
+RESPONSE=$(
+  curl -X POST ${URL} \
+  --header "Authorization: OAuth ${OAUTH}" \
+  --header "X-Org-ID: ${ORG}" \
+  --header "Content-Type: application/json" \
+  --data "${REQUEST}"
+)
+echo "\nStatus code: ${RESPONSE}\n"
 
 # TASK_NAME=$(
 #   curl -X POST "https://api.tracker.yandex.net/v2/issues/_search" \
