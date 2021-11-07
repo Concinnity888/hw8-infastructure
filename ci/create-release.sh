@@ -17,7 +17,7 @@ REQUEST='{
 }'
 
 RESPONSE=$(
-  curl -so dev/null -w '%{http_code}' -X POST "https://api.tracker.yandex.net/v2/issues/_search" \
+  curl -so dev/null -w '%{http_code}' -X POST "https://api.tracker.yandex.net/v2/issues/" \
   --header "Authorization: OAuth ${OAUTH}" \
   --header "X-Org-ID: ${ORG}" \
   --header "Content-Type: application/json" \
