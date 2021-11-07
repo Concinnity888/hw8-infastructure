@@ -6,7 +6,7 @@ CURRENT_TAG=$(git tag | sort -r | head -1)
 UNIQUE_KEY="https://github.com/Concinnity888/hw8-infastructure/releases/tag/${CURRENT_TAG}"
 
 RELEASE_URL=$(
-  curl -X POST "https://api.tracker.yandex.net/v2/issues/_search" \
+  curl -s -X POST "https://api.tracker.yandex.net/v2/issues/_search" \
   --header "Authorization: OAuth ${OAUTH}" \
   --header "X-Org-ID: ${ORG}" \
   --header 'Content-Type: application/json' \
@@ -15,7 +15,7 @@ RELEASE_URL=$(
 echo "RELEASE: ${RELEASE_URL}"
 
 RESPONSE=$(
-  curl -so dev/null -w '%{http_code}' -X POST "https://api.tracker.yandex.net/v2/issues/${RELEASE_URL}/comments" \ 
+  curl -so dev/null -w '%{http_code}' -X POST ${RELEASE_URL} \ 
   --header "Authorization: OAuth ${OAUTH}" \
   --header "X-Org-ID: ${ORG}" \
   --header "Content-Type: application/json" \
