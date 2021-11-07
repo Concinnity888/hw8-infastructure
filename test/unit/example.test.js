@@ -10,4 +10,12 @@ describe('Simple Test Case', () => {
   it('Should return boolean', () => {
     expect(true).toBe(true);
   });
+
+  it('Should return boolean', () => {
+    expect(true).toBe(true);
+  });
+
+  it('Should return boolean', () => {
+    expect(true).toBe(true);
+  });
 });
