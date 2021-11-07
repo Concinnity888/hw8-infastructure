@@ -16,9 +16,6 @@ REQUEST='{
   "queue": "TMP",
   "unique": "'"${UNIQUE_KEY}"'"
 }'
-echo "\nREQUEST: ${REQUEST}\n"
-echo "\nOAUTH: ${OAUTH}\n"
-echo "\nORG: ${ORG}\n"
 
 RESPONSE=$(
   curl -X POST ${URL} \
@@ -29,32 +26,32 @@ RESPONSE=$(
 )
 echo "\nStatus code: ${RESPONSE}\n"
 
-if [ ${RESPONSE} = 201 ]; then
-  echo "Задача создана"
-  exit 0
-elif [ ${RESPONSE} = 403 ]; then
-  echo "Ошибка аторизации"
-  exit 1
-elif [ ${RESPONSE} = 409 ]; then
-  echo 'Задача с таким релизом уже создана'
-  UPDATE=$(curl -X POST \
-    "https://api.tracker.yandex.net/v2/issues/${RESPONSE}" \
-    --header "Content-Type: application/json" \
-    --header "Authorization: OAuth ${OAUTH} " \
-    --header "X-Org-Id: ${ORG}" \
-    --data '{
-      "summary": "'"${CURRENT_TAG}"'",
-      "description": "'"${DESCRIPTION}"'",
-    }'
-  )
-  if [ ${UPDATE} = 200 ]; then
-    echo "Задача успешно обновлена"
-    exit 0
-  else
-    echo "Ошибка обновления"
-    exit 1
-  fi
-else
-  echo "Ошибка"
-  exit 1
-fi
+# if [ ${RESPONSE} = 201 ]; then
+#   echo "Задача создана"
+#   exit 0
+# elif [ ${RESPONSE} = 403 ]; then
+#   echo "Ошибка аторизации"
+#   exit 1
+# elif [ ${RESPONSE} = 409 ]; then
+#   echo 'Задача с таким релизом уже создана'
+#   UPDATE=$(curl -X POST \
+#     "https://api.tracker.yandex.net/v2/issues/${RESPONSE}" \
+#     --header "Content-Type: application/json" \
+#     --header "Authorization: OAuth ${OAUTH} " \
+#     --header "X-Org-Id: ${ORG}" \
+#     --data '{
+#       "summary": "'"${CURRENT_TAG}"'",
+#       "description": "'"${DESCRIPTION}"'",
+#     }'
+#   )
+#   if [ ${UPDATE} = 200 ]; then
+#     echo "Задача успешно обновлена"
+#     exit 0
+#   else
+#     echo "Ошибка обновления"
+#     exit 1
+#   fi
+# else
+#   echo "Ошибка"
+#   exit 1
+# fi
