@@ -45,6 +45,7 @@ elif [ ${RESPONSE} = 409 ]; then
   else
     echo "Ошибка обновления"
     exit 1
+  fi
 else
   echo "Ошибка"
   exit 1
