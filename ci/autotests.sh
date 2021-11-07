@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 RESULT=$(npm test 2>&1 | tr -s "\n" " ")
+echo "RESULT: ${RESULT}"
 
 CURRENT_TAG=$(git tag | sort -r | head -1)
 UNIQUE_KEY="https://github.com/Concinnity888/hw8-infastructure/releases/tag/${CURRENT_TAG}"
