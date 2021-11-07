@@ -23,6 +23,7 @@ RESPONSE=$(
   --header "Content-Type: application/json" \
   --data "${REQUEST}"
 )
+echo "\nStatus code: ${RESPONSE}\n"
 
 if [ ${RESPONSE} = 201 ]; then
   echo "Задача создана"
