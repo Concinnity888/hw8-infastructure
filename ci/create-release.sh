@@ -60,7 +60,7 @@ elif [ ${RESPONSE} = 409 ]; then
   if [ ${UPDATE} = 200 ]; then
     echo "Задача успешно обновлена"
     exit 0
-  if [ ${UPDATE} = 201 ]; then
+  elif [ ${UPDATE} = 201 ]; then
     echo "201"
     exit 0
   else
