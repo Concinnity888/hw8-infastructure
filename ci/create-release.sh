@@ -27,6 +27,9 @@ RESPONSE=$(
 if [ ${RESPONSE} = 201 ]; then
   echo "Задача создана"
   exit 0
+elif [ ${RESPONSE} = 403 ]; then
+  echo "Ошибка аторизации"
+  exit 1
 elif [ ${RESPONSE} = 409 ]; then
   echo 'Задача с таким релизом уже создана'
   UPDATE=$(curl -X POST \
