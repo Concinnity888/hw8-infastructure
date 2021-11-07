@@ -5,7 +5,7 @@ PREV_TAG=$(git tag | sort -r | head -1 | tail -1)
 AUTHOR=$(git show ${CURRENT_TAG} | grep Author:)
 DATE=$(git show ${PREV_TAG} | grep Date:)
 
-CHANGELOG=$(git log ${PREVIOUS_VERSION}.. --pretty=format:"%s | %an, %ad\n" --date=short | tr -s "\n" " ")
+CHANGELOG=$(git log ${PREV_TAG}.. --pretty=format:"%s | %an, %ad\n" --date=short | tr -s "\n" " ")
 DESCRIPTION="${AUTHOR} \n ${DATE} \n Номер версии: ${CURRENT_TAG} \n changelog: ${CHANGELOG}"
 UNIQUE_KEY="https://github.com/Concinnity888/hw8-infastructure/releases/tag/${CURRENT_TAG}"
 
