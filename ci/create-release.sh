@@ -2,10 +2,10 @@
 
 CURRENT_TAG=$(git tag --sort version:refname | tail -1 | head -1)
 PREV_TAG=$(git tag --sort version:refname | tail -2 | head -1)
-echo "\nPREV_TAG: ${PREV_TAG}\n"
+# echo "\nPREV_TAG: ${PREV_TAG}\n"
 AUTHOR=$(git show $"CURRENT_TAG" | grep Author:)
 DATE=$(git show $"PREV_TAG" | grep Date:)
-echo "\nDATE: ${DATE}\n"
+# echo "\nDATE: ${DATE}\n"
 
 CHANGELOG=$(git log ${PREV_TAG}.. --pretty=format:"%s | %an, %ad\n" --date=short | tr -s "\n" " ")
 DESCRIPTION="${AUTHOR} \n ${DATE} \n Номер версии: ${CURRENT_TAG} \n changelog: ${CHANGELOG}"
