@@ -4,8 +4,8 @@ CURRENT_TAG=$(git tag --sort version:refname | tail -1 | head -1)
 PREV_TAG=$(git tag --sort version:refname | tail -2 | head -1)
 echo "\nCURRENT_TAG: ${CURRENT_TAG}\n"
 echo "\nPREV_TAG: ${PREV_TAG}\n"
-AUTHOR=$(git show $"CURRENT_TAG" | grep Author:)
-DATE=$(git show $"PREV_TAG" | grep Date:)
+AUTHOR=$(git show ${CURRENT_TAG} | grep Author:)
+DATE=$(git show ${PREV_TAG} | grep Date:)
 echo "\nAUTHOR: ${AUTHOR}\n"
 echo "\nDATE: ${DATE}\n"
 
