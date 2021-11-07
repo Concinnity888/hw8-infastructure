@@ -8,6 +8,7 @@ DATE=$(git show ${PREV_TAG} | grep Date:)
 CHANGELOG=$(git log ${PREV_TAG}.. --pretty=format:"%s | %an, %ad\n" --date=short | tr -s "\n" " ")
 DESCRIPTION="${AUTHOR} \n ${DATE} \n Номер версии: ${CURRENT_TAG} \n changelog: ${CHANGELOG}"
 UNIQUE_KEY="https://github.com/Concinnity888/hw8-infastructure/releases/tag/${CURRENT_TAG}"
+URL="https://api.tracker.yandex.net/v2/issues/"
 
 REQUEST='{
   "summary": "'"${CURRENT_TAG}"'",
@@ -16,9 +17,11 @@ REQUEST='{
   "unique": "'"${UNIQUE_KEY}"'"
 }'
 echo "\nREQUEST: ${REQUEST}\n"
+echo "\nOAUTH: ${OAUTH}\n"
+echo "\nORG: ${ORG}\n"
 
 RESPONSE=$(
-  curl -so dev/null -w '%{http_code}' -X POST "https://api.tracker.yandex.net/v2/issues/" \
+  curl -so dev/null -w '%{http_code}' -X POST ${URL} \
   --header "Authorization: OAuth ${OAUTH}" \
   --header "X-Org-ID: ${ORG}" \
   --header "Content-Type: application/json" \
