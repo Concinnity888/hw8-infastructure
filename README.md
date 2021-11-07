@@ -10,4 +10,4 @@ git commit -m "<commit_message>"
 ```
 
 * Создайте тег для коммитов `git tag <tag> <commit_hash>`
-* Залейте изменения в main `main`
+* Залейте изменения в `main`
