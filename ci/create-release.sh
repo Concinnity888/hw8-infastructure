@@ -47,7 +47,7 @@ if [ ${RESPONSE} = 201 ]; then
 elif [ ${RESPONSE} = 409 ]; then
   echo 'Задача с таким релизом уже создана'
   exit 0
-  UPDATE=$(curl -so dev/null -w '%{http_code}' -X PATCH \
+  UPDATE=$(curl -X PATCH \
     "https://api.tracker.yandex.net/v2/issues/${TASK_NAME}" \
     --header "Content-Type: application/json" \
     --header "Authorization: OAuth ${OAUTH} " \
